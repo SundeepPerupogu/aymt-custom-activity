@@ -21,7 +21,7 @@
           "userTimeZone": ""
         }
       ],
-      "url": "https://www.example.com/execute",
+      "url": "https://aymt-custom-activity.onrender.com",
       "verb": "POST",
       "body": "",
       "header": "",
