@@ -1,60 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Difference Calculator</title>
+    <title>Custom Activity</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/postmonger/1.0.15/postmonger.min.js"></script>
+    <script src="customactivity.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calculate Time Difference</h1>
-    <form id="time-difference-form">
-        <label for="future_date">Future Date (YYYY-MM-DD HH:MM:SS):</label>
-        <input type="text" id="future_date" name="future_date" required>
-        <br>
-        <label for="user_timezone">Your Time Zone:</label>
-        <input type="text" id="user_timezone" name="user_timezone" required>
-        <br>
-        <button type="submit">Calculate</button>
-    </form>
-    <p id="result"></p>
-
-    <script type="text/javascript" src="custom-activity.js"></script>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/require.js"></script>
-    <script type="text/javascript">
-      (function () {
-        var config = {
-          baseUrl: "",
-        };
-
-        var dependencies = ["customActivity"];
-
-        require(config, dependencies);
-      })();
-    </script>
-     <script>
-         document.getElementById('time-difference-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const future_date = document.getElementById('future_date').value;
-            const user_timezone = document.getElementById('user_timezone').value;
-
-            const response = await fetch('/time_difference', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ future_date, user_timezone })
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-                document.getElementById('result').innerText = `Time difference: ${result.time_difference}`;
-            } else {
-                document.getElementById('result').innerText = `Error: ${result.error}`;
-            }
-        });
-    </script>
+    <div class="container">
+        <h1>Custom Activity</h1>
+        <div class="form-group">
+            <label for="futureUtcTime">Future UTC Time (HH:MM:SS):</label>
+            <input type="text" id="futureUtcTime" name="futureUtcTime" placeholder="Enter time in UTC">
+        </div>
+        <div class="form-group">
+            <label for="userTimeZone">User Time Zone:</label>
+            <input type="text" id="userTimeZone" name="userTimeZone" placeholder="Enter time zone (e.g., America/New_York)">
+        </div>
+    </div>
 </body>
 </html>
