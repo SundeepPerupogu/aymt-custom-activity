@@ -5,6 +5,7 @@
     "node": "10.x"
   },
   "scripts": {
+    "build": "npm install moment",
     "start": "node server.js"
   },
   "author": "Sundeep Perupogu",
