@@ -32,17 +32,17 @@
   },
   "configurationArguments": {
     "publish": {
-      "url": "https://www.example.com/publish",
+      "url": "https://aymt-custom-activity.onrender.com/publish",
       "verb": "POST",
       "useJwt": false
     },
     "validate": {
-      "url": "https://www.example.com/validate",
+      "url": "https://aymt-custom-activity.onrender.com/validate",
       "verb": "POST",
       "useJwt": false
     },
     "stop": {
-      "url": "https://www.example.com/stop",
+      "url": "https://aymt-custom-activity.onrender.com/stop",
       "verb": "POST",
       "useJwt": false
     }
@@ -51,7 +51,7 @@
     "configModal": {
       "height": 200,
       "width": 300,
-      "url": "https://www.example.com/index.html"
+      "url": "https://aymt-custom-activity.onrender.com/index.html"
     }
   },
   "schema": {
