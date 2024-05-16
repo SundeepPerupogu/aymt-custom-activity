@@ -1,90 +1,92 @@
 {
-  "workflowApiVersion": "1.1",
-  "metaData": {
-    "icon": "images/sms.png",
-    "category": "message"
-  },
-  "type": "REST",
-  "lang": {
-    "en-US": {
-      "name": "REST Activity (Workflow API v1.1)",
-      "description": "An example REST activity using workflow API v1.1 format."
-    }
-  },
-  "arguments": {
-    "execute": {
-      "inArguments": [
-        {
-          "emailAddress": "{{InteractionDefaults.Email}}"
-        },
-        {
-          "phoneNumber": "{{Contact.Default.PhoneNumber}}"
-        }
-      ],
-      "outArguments": [
-        {
-          "foundSignupDate": ""
-        }
-      ],
-      "url": "https://some-endpoint.com/execute"
-    }
-  },
-  "configurationArguments": {
-    "save": {
-      "url": "URI/for/your/activity/save"
+    "workflowApiVersion": "1.1",
+    "metaData": {
+      "icon": "images/LOGO.png",
+    //  "isConfigured":"true",
+      "category": "message"
     },
-    "publish": {
-      "url": "URI/for/your/activity/publish"
+    "type": "REST",
+    "lang": {
+      "en-US": {
+        "name": "Custom Activity Component-DateTimeDelta",
+        "description": "Journey Builder Custom Activity for Date time Delta API v1.1 format."
+      }
     },
-    "validate": {
-      "url": "URI/for/your/activity/validate"
-    },
-    "stop": {
-      "url": "URI/for/your/activity/stop"
-    }
-  },
-  "wizardSteps": [
-    { "label": "Step 1", "key": "step1" },
-    { "label": "Step 2", "key": "step2" },
-    { "label": "Step 3", "key": "step3" },
-    { "label": "Step 4", "key": "step4", "active": false }
-  ],
-  "userInterfaces": {
-    "configModal": {
-      "height": 200,
-      "width": 300,
-      "fullscreen": true
-    }
-  },
-  "schema": {
     "arguments": {
       "execute": {
         "inArguments": [
           {
-            "phoneNumber": {
-              "dataType": "Phone",
-              "isNullable": false,
-              "direction": "in"
-            }
+          //  "staticValue": "2024-12-18 01:06:51",
+            "future_date": "{{InteractionDefaults.TriggerTime}}"
           },
           {
-            "emailAddress": {
-              "dataType": "Email",
-              "isNullable": false,
-              "direction": "in"
-            }
+            "user_timezone": "{{Contact.Default.timezone}}"
           }
         ],
         "outArguments": [
           {
-            "foundSignupDate": {
-              "dataType": "Date",
-              "direction": "out",
-              "access": "visible"
-            }
+            "foundSignupDate": ""
           }
-        ]
+        ],
+        "url": "http://127.0.0.1:5000/time_difference"
+      }
+    },
+    "configurationArguments": {
+      "save": {
+        "url": "URI/for/your/activity/save"
+      },
+      "publish": {
+        "url": "URI/for/your/activity/publish"
+      },
+      "validate": {
+        "url": "URI/for/your/activity/validate"
+      },
+      "stop": {
+        "url": "URI/for/your/activity/stop"
+      }
+    },
+    "wizardSteps": [
+      { "label": "Step 1", "key": "step1" },
+      { "label": "Step 2", "key": "step2" },
+      { "label": "Step 3", "key": "step3" },
+      { "label": "Step 4", "key": "step4", "active": false }
+    ],
+    "userInterfaces": {
+      "configModal": {
+        "height": 200,
+        "width": 300,
+        "fullscreen": true
+      }
+    },
+    "schema": {
+      "arguments": {
+        "execute": {
+          "inArguments": [
+            {
+              "future_date": {
+                "dataType": "Date",
+                "isNullable": false,
+                "direction": "in"
+              }
+            },
+            {
+              "user_timezone": {
+                "dataType": "Text",
+                "isNullable": false,
+                "direction": "in"
+              }
+            }
+          ],
+          "outArguments": [
+            {
+              "foundSignupDate": {
+                "dataType": "Delta",
+                "direction": "out",
+                "access": "visible"
+              }
+            }
+          ]
+        }
       }
     }
   }
-}
