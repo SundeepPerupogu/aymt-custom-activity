@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Custom Journey Builder Activity</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Difference Calculator</title>
+</head>
+<body>
+    <h1>Calculate Time Difference</h1>
+    <form id="time-difference-form">
+        <label for="future_date">Future Date (YYYY-MM-DD HH:MM:SS):</label>
+        <input type="text" id="future_date" name="future_date" required>
+        <br>
+        <label for="user_timezone">Your Time Zone:</label>
+        <input type="text" id="user_timezone" name="user_timezone" required>
+        <br>
+        <button type="submit">Calculate</button>
+    </form>
+    <p id="result"></p>
 
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/require.js"></script>
-    <script type="text/javascript">
+     <script type="text/javascript" src="js/jquery.min.js"></script>
+     <script type="text/javascript" src="js/require.js"></script>
+     <script type="text/javascript">
       (function () {
         var config = {
           baseUrl: "",
@@ -17,45 +30,30 @@
 
         require(config, dependencies);
       })();
+     </script>
+     <script>
+         document.getElementById('time-difference-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const future_date = document.getElementById('future_date').value;
+            const user_timezone = document.getElementById('user_timezone').value;
+
+            const response = await fetch('/time_difference', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ future_date, user_timezone })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                document.getElementById('result').innerText = `Time difference: ${result.time_difference}`;
+            } else {
+                document.getElementById('result').innerText = `Error: ${result.error}`;
+            }
+        });
     </script>
-
-    <!--Styles-->
-    <style type="text/css">
-      body {
-        padding: 20px;
-        margin: 0;
-      }
-      .step {
-        display: none;
-      }
-      #step1 {
-        display: block;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="step1" class="step">
-      Select your SMS message:
-      <select id="select1">
-        <option value="">Select an option</option>
-        <option value="someMessage">Some SMS</option>
-        <option value="anotherMessage">Another SMS</option>
-        <option value="thirdMessage">Third SMS</option>
-        <option value="unknownMessage">Unknown SMS</option>
-      </select>
-
-      <button id="toggleLastStep">Toggle Last Step</button>
-    </div>
-    <div id="step2" class="step">
-      Here's a second page with some info on it.
-    </div>
-    <div id="step3" class="step">
-      You chose the message:
-      <div id="message"></div>
-    </div>
-    <div id="step4" class="step">
-      Hey, here's a fourth step, just for you. Toggle this on or off from step
-      1.
-    </div>
-  </body>
+</body>
 </html>
