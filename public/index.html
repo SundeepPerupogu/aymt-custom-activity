@@ -18,19 +18,8 @@
     </form>
     <p id="result"></p>
 
-     <script type="text/javascript" src="js/jquery.min.js"></script>
-     <script type="text/javascript" src="js/require.js"></script>
-     <script type="text/javascript">
-      (function () {
-        var config = {
-          baseUrl: "",
-        };
-
-        var dependencies = ["customActivity"];
-
-        require(config, dependencies);
-      })();
-     </script>
+     <script src="custom-activity.js"></script>
+     <script src="app.py"></script>
      <script>
          document.getElementById('time-difference-form').addEventListener('submit', async function(event) {
             event.preventDefault();
