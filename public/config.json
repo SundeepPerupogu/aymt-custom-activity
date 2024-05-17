@@ -21,6 +21,14 @@
           "userTimeZone": ""
         }
       ],
+      "outArguments": [
+        {
+          "timeDifference": {
+            "dataType": "Text",
+            "isNullable": false
+          }
+        }
+      ],
       "url": "https://aymt-custom-activity.onrender.com",
       "verb": "POST",
       "body": "",
@@ -57,14 +65,23 @@
   "schema": {
     "arguments": {
       "execute": {
-        "inArguments": [],
+        "inArguments": [
+          {
+            "name": "futureUtcTime",
+            "dataType": "Text",
+            "isNullable": false
+          },
+          {
+            "name": "userTimeZone",
+            "dataType": "Text",
+            "isNullable": false
+          }
+        ],
         "outArguments": [
           {
-            "timeDifference": {
-              "dataType": "Text",
-              "isNullable": false,
-              "direction": "out"
-            }
+            "name": "timeDifference",
+            "dataType": "Text",
+            "isNullable": false
           }
         ]
       }
